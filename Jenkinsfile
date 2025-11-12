@@ -24,7 +24,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 // Use bat for your script
-                bat 'C:\data\jenkins_home\workspace\Test-Task\jenkins\scripts\deliver.bat'
+                bat 'C:\\data\\jenkins_home\\workspace\\Test-Task\\jenkins\\scripts\\deliver.bat'
             }
         }
     }
