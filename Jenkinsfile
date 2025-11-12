@@ -1,19 +1,30 @@
 pipeline {
     agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                bat 'mvn -B -DskipTests clean package' 
+                // Use bat for Windows
+                bat 'mvn -B -DskipTests clean package'
             }
         }
-    stage('Test') { 
+        stage('Test') {
             steps {
-                bat 'mvn test' 
+                bat 'mvn test'
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml' 
+                    // JUnit reports work the same
+                    junit 'target\\surefire-reports\\*.xml'
                 }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                // Use bat for your script
+                bat 'jenkins\\scripts\\deliver.bat'
             }
         }
     }
